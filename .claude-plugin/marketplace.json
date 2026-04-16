@@ -1,0 +1,19 @@
+{
+  "name": "claude-clampe",
+  "owner": {
+    "name": "Jianwen Xu",
+    "email": "jianwen.xu.cn@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "claude-clampe",
+      "description": "Token-efficient behavioral skill for Claude Code — save tokens while maintaining intelligence",
+      "version": "0.1.0",
+      "source": "./",
+      "author": {
+        "name": "Jianwen Xu",
+        "email": "jianwen.xu.cn@gmail.com"
+      }
+    }
+  ]
+}

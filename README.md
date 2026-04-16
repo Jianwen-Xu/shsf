@@ -18,15 +18,17 @@ An intelligence safeguard ensures thoroughness when it's genuinely needed.
 
 ## Install
 
+Add the marketplace and install the plugin:
+
 ```bash
-claude plugins add <path-to-claude-clampe>
+claude plugins marketplace add github:xujianwen/claude-clampe
+claude plugins install claude-clampe
 ```
 
-Or clone this repo and add it as a local plugin:
+Or try it for a single session without installing:
 
 ```bash
-git clone https://github.com/xujianwen/claude-clampe.git
-claude plugins add ./claude-clampe
+claude --plugin-dir /path/to/claude-clampe
 ```
 
 ## Usage
