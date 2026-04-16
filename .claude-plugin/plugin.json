@@ -1,0 +1,18 @@
+{
+  "name": "claude-clampe",
+  "description": "Token-efficient behavioral skill for Claude Code — save tokens while maintaining intelligence",
+  "version": "0.1.0",
+  "author": {
+    "name": "Jianwen Xu",
+    "email": "jianwen.xu.cn@gmail.com"
+  },
+  "repository": "https://github.com/xujianwen/claude-clampe",
+  "license": "MIT",
+  "keywords": [
+    "tokens",
+    "efficiency",
+    "cost-saving",
+    "behavioral",
+    "skills"
+  ]
+}
