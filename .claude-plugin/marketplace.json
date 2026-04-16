@@ -8,7 +8,7 @@
     {
       "name": "claude-clampe",
       "description": "Token-efficient behavioral skill for Claude Code — save tokens while maintaining intelligence",
-      "version": "0.3.0",
+      "version": "0.3.1",
       "source": "./",
       "author": {
         "name": "Jianwen Xu",

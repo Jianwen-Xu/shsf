@@ -11,42 +11,9 @@ Two phases. No exploration. The user's brain does the thinking (free). You just 
 
 When the user invokes this skill with a task:
 
-1. Do NOT make any tool calls. Do NOT explore the codebase.
-2. Create directory `.clampe/` if it doesn't exist.
-3. Write `.clampe/spec.md` with this structure, tailored to the task:
-
-```markdown
-# Task Spec
-
-## Task
-<!-- Pre-filled from user's request -->
-{task description}
-
-## Files to Modify
-<!-- List exact file paths, one per line -->
-
-
-## Current Behavior
-<!-- Describe what the code does now in the relevant area -->
-
-
-## Desired Behavior
-<!-- Describe exactly what the code should do after the change -->
-
-
-## Constraints
-<!-- Patterns, conventions, libraries, or rules to follow -->
-
-
-## Dependencies
-<!-- Other files or systems this change touches -->
-
-
-## Test Plan
-<!-- How to verify the change works -->
-
-```
-
+1. Do NOT explore the codebase.
+2. Read `skills/clampe/spec-template.md` (shipped with this plugin).
+3. Copy it to `.clampe/spec.md`, filling in the `## Task` section with the user's request.
 4. Output ONLY: `Spec at .clampe/spec.md — fill it out, then say go.`
 
 Nothing else. No greetings. No explanations. One line.

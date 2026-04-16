@@ -160,3 +160,9 @@ Shift cognitive work from Claude (expensive tokens) to the user (free brainpower
 - The user's domain knowledge is captured once, precisely, in a structured format
 - Claude's execution phase is almost pure action — reads spec, makes edits, done
 - The spec is reusable (similar future tasks can reuse the same file as a template)
+
+---
+
+## v0.3.1 — Static Spec Template (2026-04-16)
+
+The spec template markdown is always the same structure. In v0.3.0, Claude composed it from instructions embedded in SKILL.md — spending tokens on both the skill prompt and the generation. v0.3.1 ships the template as a static file (`skills/clampe/spec-template.md`). Phase 1 becomes: read template, copy to `.clampe/spec.md`, fill in the task line. This shrinks SKILL.md and eliminates token spend on template generation.
