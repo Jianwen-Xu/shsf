@@ -136,3 +136,27 @@ Token savings must never degrade output quality. Three safeguards:
 4. **Verify intelligence:** Output should be equally correct and complete — just less verbose and with fewer redundant operations.
 5. **Test edge cases:** Complex tasks that genuinely need thorough exploration should still work well (the exception clauses should fire).
 6. **Cross-session:** Run setup mode, restart conversation, verify CLAUDE.md entries persist the behaviors.
+
+---
+
+## v0.3 — Spec-Driven Mode (2026-04-16)
+
+### Motivation
+
+v0.1 (behavioral suggestions) and v0.2 (hard rules) both reduced token usage, but not dramatically. The fundamental issue: even with strict rules, Claude still spends tokens *thinking* — exploring, reasoning, composing. The biggest savings come from not thinking at all, but executing from a pre-built spec.
+
+### Core Concept
+
+Shift cognitive work from Claude (expensive tokens) to the user (free brainpower). The user fills out a structured spec file offline; Claude reads it and executes with near-zero exploration.
+
+### Two-Phase Flow
+
+1. **Generate Spec:** Claude creates `.clampe/spec.md` — a structured questionnaire tailored to the task. No tool calls, no exploration. Fields: Task, Files to Modify, Current Behavior, Desired Behavior, Constraints, Dependencies, Test Plan.
+2. **Execute from Spec:** User says "go." Claude reads the spec and executes using only the information provided. No exploration beyond what the spec specifies.
+
+### Why This Works
+
+- A spec file replaces dozens of back-and-forth messages and tool calls
+- The user's domain knowledge is captured once, precisely, in a structured format
+- Claude's execution phase is almost pure action — reads spec, makes edits, done
+- The spec is reusable (similar future tasks can reuse the same file as a template)

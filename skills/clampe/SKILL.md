@@ -1,44 +1,71 @@
 ---
 name: clampe
-description: Extreme token-saving mode. Invoke at conversation start to minimize token consumption. Hard rules — not suggestions.
+description: Extreme token-saving mode. Generates a spec file for the user to fill out, then executes from it with near-zero exploration. Invoke with a task description.
 ---
 
-# Clampe — Extreme Token Saving
+# Clampe — Spec-Driven Execution
 
-These are hard rules. Follow every one for the rest of this conversation. No exceptions unless the user would get a wrong result.
+Two phases. No exploration. The user's brain does the thinking (free). You just execute (cheap).
 
-## 1. Ask First
+## Phase 1: Generate Spec
 
-NEVER use Grep, Glob, Read, or Agent on unknown files without asking the user first.
+When the user invokes this skill with a task:
 
-- Before any exploration: ask the user where to look. Use multiple-choice or yes/no questions ONLY. Never ask open-ended questions.
-- Every question must make your next action unambiguous. Bad: "Where should I look?" Good: "Is the auth logic in (a) src/auth/, (b) src/middleware/, or (c) somewhere else?"
-- Skip asking ONLY when: the user already gave the exact file path, or you are editing a file you already have in context.
-- One question per message. Do not bundle.
+1. Do NOT make any tool calls. Do NOT explore the codebase.
+2. Create directory `.clampe/` if it doesn't exist.
+3. Write `.clampe/spec.md` with this structure, tailored to the task:
 
-## 2. Output Budget
+```markdown
+# Task Spec
 
-- Default: 1-2 lines max.
-- Code edits: show only the Edit tool call. Zero explanation.
-- Confirmations: "Done." — nothing more.
-- NEVER output: greetings, transitions ("Let me..."), "Here's what I did," trailing suggestions, "let me know if," markdown headers for short responses, or bullet-point recaps.
-- Expand ONLY when the user says "explain," "why," or explicitly asks for detail.
+## Task
+<!-- Pre-filled from user's request -->
+{task description}
 
-## 3. Minimal Tools
+## Files to Modify
+<!-- List exact file paths, one per line -->
 
-- Max 1 exploration tool call before asking user to confirm direction.
-- NEVER use Agent or subagent tools. Use Grep/Read directly.
-- NEVER read a file without `offset` and `limit`. Estimate the range you need. If unsure, read 50 lines max.
-- Batch all independent tool calls into one parallel message. Zero sequential calls when parallel is possible.
-- NEVER re-read a file you already have in context.
 
-## 4. Context Discipline
+## Current Behavior
+<!-- Describe what the code does now in the relevant area -->
 
-- NEVER echo file contents or tool outputs in your response text.
-- NEVER repeat information the user already stated.
-- Extract the one fact you need from a tool result. Discard the rest.
-- If you need multiple facts from one file, get them in one read.
 
-## 5. Intelligence Safeguard
+## Desired Behavior
+<!-- Describe exactly what the code should do after the change -->
 
-Override any rule above ONLY when following it would produce a wrong result. "Less thorough" is not wrong. "Incorrect" is wrong.
+
+## Constraints
+<!-- Patterns, conventions, libraries, or rules to follow -->
+
+
+## Dependencies
+<!-- Other files or systems this change touches -->
+
+
+## Test Plan
+<!-- How to verify the change works -->
+
+```
+
+4. Output ONLY: `Spec at .clampe/spec.md — fill it out, then say go.`
+
+Nothing else. No greetings. No explanations. One line.
+
+## Phase 2: Execute
+
+When the user says "go" (or "execute", "run", "do it", or similar):
+
+1. Read `.clampe/spec.md`.
+2. Execute using ONLY information in the spec. No exploration beyond what the spec specifies.
+3. If the spec is missing something critical for a correct result, ask ONE multiple-choice question. Do not explore.
+4. After completion, output ONLY: `Done.`
+
+## Rules (both phases)
+
+- NEVER explore unknown files without spec info or user direction.
+- NEVER use Agent or subagent tools.
+- NEVER echo file contents or tool outputs in responses.
+- NEVER read a file without `offset` and `limit`.
+- Batch all independent tool calls into one parallel message.
+- Output budget: 1-2 lines max. No greetings, transitions, summaries, or suggestions.
+- Override rules ONLY when following them would produce a wrong result.
