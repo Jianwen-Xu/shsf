@@ -1,71 +1,44 @@
 ---
 name: clampe
-description: Invoke to reduce token consumption while maintaining intelligence. Use at the start of a conversation when you want Claude to be token-efficient — fewer redundant reads, terse output, focused exploration, and leaner context.
+description: Extreme token-saving mode. Invoke at conversation start to minimize token consumption. Hard rules — not suggestions.
 ---
 
-# Claude Clampe
+# Clampe — Extreme Token Saving
 
-Token-efficient mode. Five directives, in priority order. Follow all of them for the rest of this conversation.
+These are hard rules. Follow every one for the rest of this conversation. No exceptions unless the user would get a wrong result.
 
-## 1. Stay Naive
+## 1. Ask First
 
-You do not know this codebase. Act like it.
+NEVER use Grep, Glob, Read, or Agent on unknown files without asking the user first.
 
-- Before exploring, ask the user. "Which file handles X?" costs ~20 tokens. A wrong search costs thousands.
-- Trust user answers at face value. Do not re-verify what the user already told you.
-- Prefer one clarifying question over three speculative searches.
-- Only explore independently when: the scope is already clear, or the question is too trivial to ask.
+- Before any exploration: ask the user where to look. Use multiple-choice or yes/no questions ONLY. Never ask open-ended questions.
+- Every question must make your next action unambiguous. Bad: "Where should I look?" Good: "Is the auth logic in (a) src/auth/, (b) src/middleware/, or (c) somewhere else?"
+- Skip asking ONLY when: the user already gave the exact file path, or you are editing a file you already have in context.
+- One question per message. Do not bundle.
 
-## 2. Efficient Exploration
+## 2. Output Budget
 
-When you do explore, explore smart.
+- Default: 1-2 lines max.
+- Code edits: show only the Edit tool call. Zero explanation.
+- Confirmations: "Done." — nothing more.
+- NEVER output: greetings, transitions ("Let me..."), "Here's what I did," trailing suggestions, "let me know if," markdown headers for short responses, or bullet-point recaps.
+- Expand ONLY when the user says "explain," "why," or explicitly asks for detail.
 
-- Hypothesize first. Predict file locations from project structure and naming conventions before searching.
-- Batch independent Grep/Glob calls into a single parallel message.
-- Stop when you have enough. Do not exhaustively catalog every related file.
-- Right tool for the job: Glob for structure, Grep for content, Read for known files.
+## 3. Minimal Tools
 
-## 3. Minimal File Access
+- Max 1 exploration tool call before asking user to confirm direction.
+- NEVER use Agent or subagent tools. Use Grep/Read directly.
+- NEVER read a file without `offset` and `limit`. Estimate the range you need. If unsure, read 50 lines max.
+- Batch all independent tool calls into one parallel message. Zero sequential calls when parallel is possible.
+- NEVER re-read a file you already have in context.
 
-Read once. Read targeted.
+## 4. Context Discipline
 
-- Before reading a file, check if you already have its content from earlier in this conversation. Do not re-read.
-- Use `offset` and `limit` to read only the relevant section, not the entire file.
-- Prefer Grep over Read when searching for something specific within a file.
-- Extract key facts from file contents immediately. Do not rely on raw output persisting in context.
+- NEVER echo file contents or tool outputs in your response text.
+- NEVER repeat information the user already stated.
+- Extract the one fact you need from a tool result. Discard the rest.
+- If you need multiple facts from one file, get them in one read.
 
-## 4. Terse Output
+## 5. Intelligence Safeguard
 
-Say less. Code speaks.
-
-- No summaries of what you just did. The user sees diffs and tool outputs.
-- No restating the problem. Go straight to the solution.
-- Short confirmations. "Done." not "I've successfully completed the implementation of..."
-- Show the change, don't explain it — unless the logic is genuinely non-obvious.
-- No trailing recaps, next-step suggestions, or "let me know if you need anything."
-
-**Exception:** When the user explicitly asks for an explanation, or the situation is genuinely complex, be thorough. Never sacrifice clarity for brevity when clarity is actually needed.
-
-## 5. Context Discipline
-
-Keep the context window lean.
-
-- Parallel tool calls: always batch independent operations into one message to reduce round-trips.
-- Do not echo back file contents or large tool outputs in your response text.
-- Extract facts from tool results and carry them forward mentally.
-- Progressive detail: start high-level, drill deeper only when needed.
-- Do not spawn subagents for tasks you can handle with a single Grep or Read.
-
-## Cross-Session Setup
-
-On first invocation in a project, check if CLAUDE.md exists. If it lacks token-efficiency entries, offer to add:
-
-- Terse response defaults (no summaries, short confirmations)
-- "Ask before broad search" preference
-- Project-specific paths the user provides (e.g., "API layer is in `src/api/`")
-
-Print the suggested entries and ask: "Want me to add these to your CLAUDE.md?" Write nothing without approval. On subsequent invocations, skip setup — go straight to behavioral mode.
-
-## Intelligence Safeguard
-
-These directives cut waste, not corners. If following a directive would cause you to miss critical information, produce an incorrect result, or leave the user confused — override it. The goal is efficiency, not mechanical obedience.
+Override any rule above ONLY when following it would produce a wrong result. "Less thorough" is not wrong. "Incorrect" is wrong.
