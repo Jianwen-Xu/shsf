@@ -16,9 +16,9 @@ Two phases. No exploration. The user's brain does the thinking (free). You just 
 When the user invokes this skill with a task:
 
 1. Do NOT explore the codebase.
-2. Read `skills/clampe/spec-template.md` (shipped with this plugin).
-3. Copy it to `.clampe/spec.md`, filling in the `## Task` section with the user's request.
-4. Output ONLY: `Spec at .clampe/spec.md — fill it out, then say go.`
+2. Read `skills/clampe/clp-template.md` (shipped with this plugin).
+3. Copy it to `.clampe/clp.md`, filling in the `## Task` section with the user's request.
+4. Output ONLY: `Spec at .clampe/clp.md — fill it out, then say go.`
 
 Nothing else. No greetings. No explanations. One line.
 
@@ -26,7 +26,7 @@ Nothing else. No greetings. No explanations. One line.
 
 When the user says "go" (or "execute", "run", "do it", or similar):
 
-1. Read `.clampe/spec.md`.
+1. Read `.clampe/clp.md`.
 2. Execute using ONLY information in the spec. No exploration beyond what the spec specifies.
 3. If the spec is missing something critical for a correct result, ask ONE multiple-choice question. Do not explore.
 4. After completion, output ONLY: `Done.`
