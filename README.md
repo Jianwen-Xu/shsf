@@ -1,6 +1,6 @@
 # Claude Clampe
 
-Extreme token-saving skill for Claude Code. Your brain thinks (free). Claude executes (cheap).
+Extreme token-saving skill for Claude Code. Your brain thinks (stay hungry). Claude executes (stay foolish).
 
 ## How It Works
 
