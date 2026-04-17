@@ -17,8 +17,8 @@ When the user invokes this skill with a task:
 
 1. Do NOT explore the codebase.
 2. Read `skills/clampe/clp-template.md` (shipped with this plugin).
-3. Copy it to `.clampe/clp.md`, filling in the `## Task` section with the user's request.
-4. Output ONLY: `Spec at .clampe/clp.md — fill it out, then say go.`
+3. Copy it to `.clampe/clp-YYYYMMDD-HHMM.md` (current timestamp, e.g. `.clampe/clp-20260417-1423.md`), filling in the `## Task` section with the user's request.
+4. Output ONLY: `Spec at .clampe/clp-YYYYMMDD-HHMM.md — fill it out, then say go.` (with the actual filename)
 
 Nothing else. No greetings. No explanations. One line.
 
@@ -26,7 +26,7 @@ Nothing else. No greetings. No explanations. One line.
 
 When the user says "go" (or "execute", "run", "do it", or similar):
 
-1. Read `.clampe/clp.md`.
+1. Read the most recent `.clampe/clp-*.md` file (latest by filename).
 2. Execute using ONLY information in the spec. No exploration beyond what the spec specifies.
 3. If the spec is missing something critical for a correct result, ask ONE multiple-choice question. Do not explore.
 4. After completion, output ONLY: `Done.`
