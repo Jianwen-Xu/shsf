@@ -1,24 +1,24 @@
 ---
-name: clampe
+name: shsf
 description: >-
   Extreme token-saving mode. Generates a spec file for the user to fill out,
   then executes from it with near-zero exploration. Invoke with a task description.
   TRIGGER when: user's message starts with "shsf" (e.g. "shsf refactor this function", "shsf add tests").
-  SKIP: user is discussing the clampe skill itself, asking about it, or message does not start with "shsf".
+  SKIP: user is discussing the shsf skill itself, asking about it, or message does not start with "shsf".
 ---
 
-# Clampe — Spec-Driven Execution
+# SHSF — Spec-Driven Execution
 
-Two phases. No exploration. The user's brain does the thinking (free). You just execute (cheap).
+Two phases. No exploration. The user's brain does the thinking (stay hungry). You just execute (stay foolish).
 
 ## Phase 1: Generate Spec
 
 When the user invokes this skill with a task:
 
 1. Do NOT explore the codebase.
-2. Read `skills/clampe/shsf-template.md` (shipped with this plugin).
-3. Copy it to `.clampe/shsf-YYYYMMDD-HHMM.md` (current timestamp, e.g. `.clampe/shsf-20260417-1423.md`), filling in the `## Task` section with the user's request.
-4. Output ONLY: `Spec at .clampe/shsf-YYYYMMDD-HHMM.md — fill it out, then say go.` (with the actual filename)
+2. Read `skills/shsf/shsf-template.md` (shipped with this plugin).
+3. Copy it to `.shsf/shsf-YYYYMMDD-HHMM.md` (current timestamp, e.g. `.shsf/shsf-20260417-1423.md`), filling in the `## Task` section with the user's request.
+4. Output ONLY: `Spec at .shsf/shsf-YYYYMMDD-HHMM.md — fill it out, then say go.` (with the actual filename)
 
 Nothing else. No greetings. No explanations. One line.
 
