@@ -5,8 +5,8 @@ Extreme token-saving skill for Claude Code. Your brain thinks (stay hungry). Cla
 ## How It Works
 
 ```
-1. You:    clp add JWT auth to the /api/login endpoint
-2. Claude: generates .clampe/clp-YYYYMMDD-HHMM.md (structured questionnaire)
+1. You:    shsf add JWT auth to the /api/login endpoint
+2. Claude: generates .clampe/shsf-YYYYMMDD-HHMM.md (structured questionnaire)
 3. You:    fill out the spec in your IDE (zero tokens)
 4. You:    "go"
 5. Claude: reads spec, executes directly — no exploration
@@ -30,10 +30,10 @@ claude --plugin-dir /path/to/claude-clampe
 ## Usage
 
 ```
-clp add JWT auth to the /api/login endpoint
+shsf add JWT auth to the /api/login endpoint
 ```
 
-Fill out the generated `.clampe/clp-*.md` file, then say `go`.
+Fill out the generated `.clampe/shsf-*.md` file, then say `go`.
 
 You can also invoke with `/clampe add JWT auth to the /api/login endpoint`.
 
