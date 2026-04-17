@@ -1,6 +1,10 @@
 ---
 name: clampe
-description: Extreme token-saving mode. Generates a spec file for the user to fill out, then executes from it with near-zero exploration. Invoke with a task description.
+description: >-
+  Extreme token-saving mode. Generates a spec file for the user to fill out,
+  then executes from it with near-zero exploration. Invoke with a task description.
+  TRIGGER when: user's message contains "!clampe" (e.g. "!clampe refactor this function").
+  SKIP: user is discussing clampe itself, asking about the skill, or no "!clampe" token present.
 ---
 
 # Clampe — Spec-Driven Execution
