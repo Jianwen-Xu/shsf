@@ -17,8 +17,8 @@ When the user invokes this skill with a task:
 
 1. Do NOT explore the codebase.
 2. Read `skills/shsf/shsf-template.md` (shipped with this plugin).
-3. Copy it to `.shsf/shsf-YYYYMMDD-HHMMSS.md` (current timestamp), filling in the `## Task` section with the user's request.
-4. Output ONLY: `Spec at .shsf/shsf-YYYYMMDD-HHMMSS.md — fill it out, then say go.` (with the actual filename)
+3. List `.shsf/shsf-YYYYMMDD-*.md` (today's date) to find the highest existing index (default 0 if none), increment by 1, zero-pad to 3 digits. Copy the template to `.shsf/shsf-YYYYMMDD-<NNN>.md`, filling in the `## Task` section with the user's request.
+4. Output ONLY: `Spec at .shsf/shsf-YYYYMMDD-<NNN>.md — fill it out, then say go.` (with the actual filename)
 
 Nothing else. No greetings. No explanations. One line.
 
