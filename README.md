@@ -17,14 +17,14 @@ The spec file is the communication channel. You provide the context Claude would
 ## Install
 
 ```bash
-claude plugins marketplace add github:xujianwen/claude-clampe
-claude plugins install claude-clampe
+claude plugins marketplace add github:xujianwen/shsf
+claude plugins install shsf
 ```
 
 Or try for a single session:
 
 ```bash
-claude --plugin-dir /path/to/claude-clampe
+claude --plugin-dir /path/to/shsf
 ```
 
 ## Usage
