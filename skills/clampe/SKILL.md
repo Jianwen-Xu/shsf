@@ -26,7 +26,7 @@ Nothing else. No greetings. No explanations. One line.
 
 When the user says "go" (or "execute", "run", "do it", or similar):
 
-1. Read the most recent `.clampe/clp-*.md` file (latest by filename).
+1. Read the spec file whose path you output in Phase 1 (it's in your previous message in this conversation).
 2. Execute using ONLY information in the spec. No exploration beyond what the spec specifies.
 3. If the spec is missing something critical for a correct result, ask ONE multiple-choice question. Do not explore.
 4. After completion, output ONLY: `Done.`
