@@ -3,8 +3,8 @@ name: clampe
 description: >-
   Extreme token-saving mode. Generates a spec file for the user to fill out,
   then executes from it with near-zero exploration. Invoke with a task description.
-  TRIGGER when: user's message contains "!clampe" (e.g. "!clampe refactor this function").
-  SKIP: user is discussing clampe itself, asking about the skill, or no "!clampe" token present.
+  TRIGGER when: user's message starts with "clp" (e.g. "clp refactor this function", "clp add tests").
+  SKIP: user is discussing the clampe skill itself, asking about it, or message does not start with "clp".
 ---
 
 # Clampe — Spec-Driven Execution
