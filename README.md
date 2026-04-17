@@ -5,7 +5,7 @@ Extreme token-saving skill for Claude Code. Your brain thinks (free). Claude exe
 ## How It Works
 
 ```
-1. You:    "Add auth to my app" + /clampe
+1. You:    clp add auth to my app
 2. Claude: generates .clampe/clp-YYYYMMDD-HHMM.md (structured questionnaire)
 3. You:    fill out the spec in your IDE (zero tokens)
 4. You:    "go"
@@ -30,10 +30,12 @@ claude --plugin-dir /path/to/claude-clampe
 ## Usage
 
 ```
-/clampe add authentication to the API
+clp add authentication to the API
 ```
 
 Fill out the generated `.clampe/clp-*.md` file, then say `go`.
+
+You can also invoke with `/clampe add authentication to the API`.
 
 ## License
 
