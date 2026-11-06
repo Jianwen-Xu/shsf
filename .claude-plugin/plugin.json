@@ -1,18 +1,19 @@
 {
   "name": "shsf",
-  "description": "Token-efficient behavioral skill for Claude Code — save tokens while maintaining intelligence",
-  "version": "0.3.1",
+  "description": "Async spec, then execute — the agent gathers the facts, you confirm the decisions. Use before non-trivial changes when a plan should be reviewed first.",
+  "version": "0.4.0",
   "author": {
     "name": "Jianwen Xu",
     "email": "jianwen.xu.cn@gmail.com"
   },
-  "repository": "https://github.com/xujianwen/shsf",
+  "repository": "https://github.com/Jianwen-Xu/shsf",
   "license": "MIT",
   "keywords": [
-    "tokens",
-    "efficiency",
-    "cost-saving",
-    "behavioral",
+    "spec",
+    "spec-driven",
+    "planning",
+    "workflow",
+    "review",
     "skills"
   ]
 }

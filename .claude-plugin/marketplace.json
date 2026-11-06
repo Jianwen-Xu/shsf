@@ -7,8 +7,8 @@
   "plugins": [
     {
       "name": "shsf",
-      "description": "Token-efficient behavioral skill for Claude Code — save tokens while maintaining intelligence",
-      "version": "0.3.1",
+      "description": "Async spec, then execute — the agent gathers the facts, you confirm the decisions. Use before non-trivial changes when a plan should be reviewed first.",
+      "version": "0.4.0",
       "source": "./",
       "author": {
         "name": "Jianwen Xu",
