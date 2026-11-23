@@ -4,6 +4,10 @@ status: draft            # draft -> ready -> done. Phase 2 seals it to ready onc
                          # yourself instead, which is the same statement.
 task: <one line, imperative>
 created: <YYYY-MM-DD>
+risk: low                # low | high. Phase 2 uses this as follows: low seals itself
+                         # done, high stops at "awaiting approval" and never
+                         # approves itself. Auth, money, stored data, deletion,
+                         # migrations, irreversible acts => high.
 ---
 
 # <Task title>
@@ -52,8 +56,11 @@ Answer:
 
 ## Acceptance
 
-<!-- human owns what "good" means; agent fills the test plan from existing prior art -->
+<!-- human owns what "good" means; agent fills the evidence and test plan from
+     existing prior art. Phase 2 quotes this section when it reports. -->
 
 - **Behavior:** <observable outcome, not an implementation detail>
-- **Tests:** <which existing test file or command to extend, and why that one>
+- **Evidence:** <the exact command(s) to run, and what output counts as a pass>
+- **Test changes:** <none, or which tests must change and why that is not
+  weakening them>
 - **Not covered:** <what this change deliberately does not verify>

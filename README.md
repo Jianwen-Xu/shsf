@@ -11,13 +11,24 @@ Async spec, then execute. The agent gathers the facts; you make the decisions.
            — facts filled in, 3-7 decisions each with a recommended answer
 3. You:    confirm or overrule offline — "yes" per decision is enough
 4. You:    go — status seals to ready once every blocking decision is answered
-5. Claude: implements only the confirmed scope, verifies, reports
-           Changed / Verified / Risk
+5. Claude: implements only the confirmed scope, runs the evidence commands,
+           reports Changed / Verified / Test changes / Risk
+6. Claude: risk: low seals the spec done. risk: high stops at "awaiting your
+           approval" — it reports on its own work, it does not approve it.
 ```
 
 Two phases, and you can leave in between. The spec is also a reviewable record
 of why the change looks the way it does, which survives context compaction and
 session boundaries.
+
+## Why the last step has an approval in it
+
+An agent that implements, tests and grades its own work is not evidence. So the
+report has to quote the command and its real output rather than assert success,
+test edits have to be declared up front (`Test changes` in the spec) and again
+in the report, and high-risk changes cannot mark themselves done. The point is
+not ceremony — it is that "verified" should mean something a second person can
+re-check.
 
 ## The split
 
@@ -79,7 +90,8 @@ node skills/shsf/check.mjs .shsf/x.md   # one file
 ```
 
 Exit `1` on an unknown `status` or an unanswered `[blocking]` decision while
-`status: ready`; missing sections are warnings and still exit `0`.
+`status: ready`; missing sections and an unknown `risk` value are warnings and
+still exit `0`.
 
 ## Files
 

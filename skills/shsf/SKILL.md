@@ -39,8 +39,12 @@ Trigger: the user invokes this skill with a task.
 3. **Decisions.** Write 3–7 of them, ordered by dependency: a decision that
    depends on another goes after it. Each gets exactly one recommendation,
    worded so that "yes" accepts it. Mark the ones that block execution.
-4. **Stop there.** Leave `status: draft`. Write the path into `.shsf/latest`.
-5. **Output one line**: `Spec: .shsf/<file> — N decisions to confirm, then say go.`
+4. **Risk tier.** Set `risk:` from the blast radius, not from the diff size:
+   `high` if the change touches auth, money, stored data, deletion, migrations,
+   or anything irreversible; `low` otherwise. The human can overrule it in the
+   file — it is a judgement you owe them, not a secret.
+5. **Stop there.** Leave `status: draft`. Write the path into `.shsf/latest`.
+6. **Output one line**: `Spec: .shsf/<file> — N decisions to confirm, then say go.`
 
 Do not implement, and do not ask questions in chat during Phase 1. If recon
 overturns the request itself (wrong assumption, already implemented), put that
@@ -55,7 +59,7 @@ Trigger: "go", "execute", "run", "do it" — with, or right after, a spec on dis
    does not.
 2. **Seal.** If `status` is `draft` and every `[blocking]` decision already has an
    answer, the user has already made the decision the gate is asking about: set
-   `status: ready` yourself and mention it in one line of the report. Never set
+   `status: ready` yourself and say so in one line before the report. Never set
    it while a blocking decision is blank — that signature is the one you must not
    forge.
 3. **Gate.** Run `node <this dir>/check.mjs <spec>` when the script sits next to
@@ -64,17 +68,27 @@ Trigger: "go", "execute", "run", "do it" — with, or right after, a spec on dis
    either way the spec must now be `ready`. If it is still `draft`, stop and list
    at most three unanswered decisions. Do not guess a decision.
 4. **Implement the confirmed scope.** Deviate only if the spec is factually wrong
-   about the code; when you do, name the line that was wrong and why.
-5. **Verify** against the Acceptance section. If it names a command, run it. If it
-   names nothing runnable, say so instead of implying success.
-6. **Report three lines:**
+   about the code; when you do, name the line that was wrong and why. If the diff
+   touches a test file that the spec did not name under `Test changes`, stop and
+   say so before going further — a test edited to fit the implementation is a
+   risk, not a result.
+5. **Verify, and do not grade your own homework.** Run the commands the
+   Acceptance section names; quote the command and one line of its real output.
+   Never report "tests pass" as a claim. If nothing is runnable, write
+   `unverified` and say why. When the change touched tests or config, re-run the
+   whole relevant suite from a clean state, not just the tests you wrote.
+6. **Report** these lines, and no more:
    ```
    Changed: <files or behavior, one line>
-   Verified: <what you ran or checked>
+   Verified: <command> -> <one line of real output, or "unverified: <why>">
+   Test changes: <file> — <why>            (omit when no test changed)
    Risk: <what is untested or assumed, or "none">
    ```
-
    Not `Done.` A silent completion transfers the review cost to the user.
+7. **Seal the outcome.** `risk: low` — set `status: done`. `risk: high` — leave it
+   `ready` and end with `Awaiting your approval`; set `done` only after the human
+   says so, even if every check is green. You may report on your own work; you may
+   not approve it.
 
 ## Interop
 
