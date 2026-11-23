@@ -10,6 +10,7 @@ import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 
 const STATUSES = ['draft', 'ready', 'done'];
+const RISKS = ['low', 'high'];
 const SECTIONS = ['Task', 'Context', 'Decisions', 'Scope', 'Acceptance'];
 
 /** Problems for one file, as {line, level, message}. */
@@ -44,6 +45,12 @@ function inspect(path) {
     add(statusLine || 1, 'error', 'frontmatter is missing "status"');
   } else if (!STATUSES.includes(fm.status)) {
     add(statusLine, 'error', `unknown status "${fm.status}" (expected ${STATUSES.join(', ')})`);
+  }
+
+  // --- risk tier (optional; older specs predate it) ------------------------
+  if (fm.risk !== undefined && !RISKS.includes(fm.risk)) {
+    const riskLine = lines.findIndex((l) => /^risk:/.test(l)) + 1;
+    add(riskLine, 'warning', `unknown risk "${fm.risk}" (expected ${RISKS.join(' or ')})`);
   }
 
   // --- required sections (warnings only) -----------------------------------
