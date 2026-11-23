@@ -126,6 +126,21 @@ Exit `1` on an unknown `status` or an unanswered `[blocking]` decision while
 `status: ready`; missing sections and an unknown `risk` value are warnings and
 still exit `0`.
 
+## Gating a change
+
+`/boss` starts with the part that should not be a judgement call:
+
+```bash
+node skills/boss/gate.mjs --spec .shsf/x.md            # working tree
+node skills/boss/gate.mjs --spec .shsf/x.md --base main --head HEAD
+node skills/boss/gate.mjs --spec .shsf/x.md --strict   # exit 1 on undeclared test edits
+```
+
+It prints what changed, which files are tests, whether `Test changes` declared
+them, and which changed files the spec never mentions. It does not produce a
+verdict — it removes the bookkeeping so the verdict is about judgement, not
+eyesight.
+
 ## Files
 
 ```
@@ -133,6 +148,7 @@ skills/shsf/SKILL.md           the two-phase protocol
 skills/shsf/shsf-template.md   the spec template Phase 1 copies
 skills/shsf/check.mjs          the spec validator Phase 2 runs
 skills/boss/SKILL.md           the gate that clears a finished change
+skills/boss/gate.mjs           mechanical half: diff, test files, unmentioned paths
 .shsf/                         generated specs, one per task (commit these)
 .shsf/latest                   pointer to the newest spec (gitignored)
 ```

@@ -44,14 +44,19 @@ The spec path (from the argument, or `cat .shsf/latest`), and the change itself:
    checkout, a fixture — put that in the line or point at a script that contains
    it. A command the human cannot replay proves nothing: the card has to survive
    being checked by someone who does not trust you.
-3. **Scope drift.** Map every changed file to `## Scope` → In. Anything else is
+3. **Get the mechanical facts.** If `gate.mjs` sits next to this file, run
+   `node <this dir>/gate.mjs --spec <spec> [--base <ref>] [--head <ref>]`. It
+   lists what changed, marks test files and whether the spec declared them, and
+   names files the spec never mentions. It reports; it does not decide. When the
+   diff is the working tree, say so in the card.
+4. **Scope drift.** Map every changed file to `## Scope` → In. Anything else is
    drift: list it, do not judge it. Drift is a question for the human, not a
    verdict.
-4. **Test weakening.** Compare test-file changes against the declared
+5. **Test weakening.** Compare test-file changes against the declared
    `Test changes:`. A test file edited that was not declared, or an assertion
    weakened or skipped to make the suite green, is the failure mode this gate
    exists for. Quote the changed lines.
-5. **Stop.** If no acceptance item is runnable, the verdict is `needs-human`.
+6. **Stop.** If no acceptance item is runnable, the verdict is `needs-human`.
    Evidence you cannot produce is not a pass.
 
 ## Phase 2 — Verdict card
