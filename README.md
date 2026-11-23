@@ -1,6 +1,10 @@
 # SHSF
 
 Async spec, then execute. The agent gathers the facts; you make the decisions.
+Finished work goes through a gate that cannot clear its own output.
+
+Two skills: `/shsf` writes the spec, `/boss` decides whether the result matches
+it.
 
 ## How it works
 
@@ -20,6 +24,26 @@ Async spec, then execute. The agent gathers the facts; you make the decisions.
 Two phases, and you can leave in between. The spec is also a reviewable record
 of why the change looks the way it does, which survives context compaction and
 session boundaries.
+
+## The gate
+
+Two skills, one artifact:
+
+```
+/shsf         spec             ─┐
+                                 ├─ .shsf/<task>.md ─ (Scope, Acceptance, risk)
+implement     code             ─┘
+                                 │
+/boss         verdict card  ◀────┘   pass | reject | needs-human
+                                 │
+you           approve / reject ──┘
+```
+
+`/boss` re-derives the evidence from the repository instead of reading the
+implementer's summary, checks the diff against `## Scope`, compares test edits to
+the declared `Test changes`, and stops. It cannot approve its own work, and it
+never marks a spec done on its own. Its whole job is to make the human's decision
+cheap without making it hollow.
 
 ## Why the last step has an approval in it
 
@@ -79,6 +103,15 @@ thing.
 
 You can also invoke it as `/shsf add JWT auth to the /api/login endpoint`.
 
+When the work is done, in a fresh session:
+
+```
+/boss
+```
+
+It reads `.shsf/latest`, re-runs the acceptance evidence, and returns a verdict
+card. Approve or reject in one word; the spec records which.
+
 ## Checking a spec
 
 Phase 2 refuses to run on a `ready` spec that still has an unanswered blocking
@@ -99,6 +132,7 @@ still exit `0`.
 skills/shsf/SKILL.md           the two-phase protocol
 skills/shsf/shsf-template.md   the spec template Phase 1 copies
 skills/shsf/check.mjs          the spec validator Phase 2 runs
+skills/boss/SKILL.md           the gate that clears a finished change
 .shsf/                         generated specs, one per task (commit these)
 .shsf/latest                   pointer to the newest spec (gitignored)
 ```

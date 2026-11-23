@@ -95,6 +95,9 @@ Trigger: "go", "execute", "run", "do it" — with, or right after, a spec on dis
 - **Want to think, not to spec?** `/grill-me` — an interview in chat, no file.
 - **Spec written, two or more decisions still genuinely contested?** Hand it to
   `/grill-me` rather than asking one question in chat.
+- **Change finished and someone has to clear it?** `/boss` — it re-derives the
+  evidence in a fresh context and hands the user a verdict card. Do not run it on
+  work you just did: the author is not the gate.
 - **Project already runs an issue tracker with `to-spec` / `implement-spec`?**
   Keep this file as the local working copy; the tracker holds the published one.
 

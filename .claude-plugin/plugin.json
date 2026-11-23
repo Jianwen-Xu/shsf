@@ -1,7 +1,7 @@
 {
   "name": "shsf",
-  "description": "Async spec, then execute — the agent gathers the facts, you confirm the decisions. Use before non-trivial changes when a plan should be reviewed first.",
-  "version": "0.5.0",
+  "description": "Async spec, then execute — the agent gathers the facts, you confirm the decisions. Ships /boss, a gate that re-derives the evidence and never clears its own work.",
+  "version": "0.6.0",
   "author": {
     "name": "Jianwen Xu",
     "email": "jianwen.xu.cn@gmail.com"
