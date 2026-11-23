@@ -1,5 +1,5 @@
 ---
-status: ready
+status: done
 task: Add a spec check that refuses `go` when the spec on disk is incomplete
 created: 2026-11-06
 ---
@@ -98,3 +98,11 @@ Answer: yes
   (c), add a `node --test` file instead.
 - **Not covered:** frontmatter values with multi-line block scalars, Windows
   paths, and any spec outside `.shsf/`.
+
+## Verdict
+
+- 2026-11-23 — approved — Jianwen, on a gate card produced in a fresh context
+  against `fc67051`: all four evidence runs reproduced (exit 0 / 1 / 1 / 0).
+  Recorded, not blocking: the `fc67051` commit message claims SKILL.md and
+  README edits that landed in `e33efaa` instead — the diff is narrower than the
+  message.
