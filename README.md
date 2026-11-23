@@ -1,5 +1,7 @@
 # SHSF
 
+English · [简体中文](README.zh-CN.md)
+
 Async spec, then execute. The agent gathers the facts; you make the decisions.
 Finished work goes through a gate that cannot clear its own output.
 
